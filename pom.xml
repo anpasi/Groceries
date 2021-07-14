@@ -6,7 +6,7 @@
 
   <groupId>grocery.com</groupId>
  
- <artifactId>groceryParser</artifactId>
+ <artifactId>Groceries</artifactId>
   <version>1.0</version>
   <name>GroceryTest</name>
   
