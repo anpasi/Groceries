@@ -4,7 +4,6 @@ package com.groceries.dto;
 import java.util.List;
 
 public class GroceryList {
-
 	
 	private List<Grocery> results;
 	private Double total;
@@ -12,8 +11,6 @@ public class GroceryList {
 	
 	public GroceryList() {
 	}
-
-
 
 	public void setTotal(Double total) {
 		this.total = total;

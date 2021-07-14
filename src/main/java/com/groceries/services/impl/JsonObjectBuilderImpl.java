@@ -3,12 +3,15 @@ package com.groceries.services.impl;
 import java.io.StringWriter;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.groceries.dto.Grocery;
 import com.groceries.dto.GroceryList;
 import com.groceries.services.JsonObjectBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+@Service("jsonService")
 public class JsonObjectBuilderImpl implements JsonObjectBuilder {
 
 	public String buildJsonObjectFromGroceryList(List<Grocery> groceries) throws Exception {

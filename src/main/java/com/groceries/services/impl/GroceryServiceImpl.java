@@ -9,6 +9,7 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.groceries.dto.Grocery;
 import com.groceries.services.GroceryService;
 
+@Service("groceryService")
 public class GroceryServiceImpl implements GroceryService {
 
 	public List<Grocery> getAllGroceries(String url) throws Exception{

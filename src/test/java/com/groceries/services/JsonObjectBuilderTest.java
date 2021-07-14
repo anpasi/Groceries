@@ -1,16 +1,18 @@
 package com.groceries.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.groceries.config.BeanConfiguration;
 import com.groceries.dto.Grocery;
 import com.groceries.dto.GroceryBuilder;
+import com.groceries.services.impl.JsonObjectBuilderImpl;
 	
 
 public class JsonObjectBuilderTest {
@@ -19,8 +21,8 @@ public class JsonObjectBuilderTest {
 
 	@Before
 	public void beforeEachTest() throws Exception {
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-		jsonService = (JsonObjectBuilder)appContext.getBean("jsonService");
+//		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+		jsonService = new JsonObjectBuilderImpl();
 	}
 	
 	

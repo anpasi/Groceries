@@ -16,8 +16,9 @@ import javax.security.cert.X509Certificate;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.groceries.config.BeanConfiguration;
 import com.groceries.dto.Grocery;
 
 public class GroceryServiceTest {
@@ -30,7 +31,7 @@ public class GroceryServiceTest {
 
 	@Before
 	public void beforeEachTest() {
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
+		ApplicationContext appContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 		groceryService = (GroceryService)appContext.getBean("groceryService");
 	}
 
