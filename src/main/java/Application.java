@@ -36,7 +36,6 @@ public class Application {
 			//Parse groceries 
 			System.out.println("JSON is:\n" + jsonService.buildJsonObjectFromGroceryList(groceries));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
