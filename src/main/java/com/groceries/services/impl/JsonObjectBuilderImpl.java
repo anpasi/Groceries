@@ -19,6 +19,7 @@ public class JsonObjectBuilderImpl implements JsonObjectBuilder {
 		StringWriter stringEmp = new StringWriter();
 		GroceryList groceryList = new GroceryList();
 		groceryList.setResults(groceries);
+		groceryList.setTotal(groceries.stream().mapToDouble(f -> f.getPrice()).sum());
 		objectMapper.writeValue(stringEmp, groceryList);
 		return stringEmp.toString();
 	}

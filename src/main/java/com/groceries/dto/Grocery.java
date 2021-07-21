@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * DTO with the grocery details
  * 
- * @author Antonio P
+ * @author Antonio 
  *
  */
 public class Grocery {

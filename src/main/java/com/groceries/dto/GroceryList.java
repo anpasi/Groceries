@@ -12,9 +12,6 @@ public class GroceryList {
 	public GroceryList() {
 	}
 
-	public void setTotal(Double total) {
-		this.total = total;
-	}
 
 	public List<Grocery> getResults() {
 		return results;
@@ -23,6 +20,8 @@ public class GroceryList {
 	public void setResults(List<Grocery> result) {
 		this.results = result;
 	}
+	
+	
 	public Double getTotal() {
 		total = new Double(0);
 		
@@ -32,5 +31,11 @@ public class GroceryList {
 		
 		return total;
 	}
+	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	
 
 }

@@ -14,9 +14,7 @@ public class Application {
 	
 	public static final String GROCERIES_URL= "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
 	
-
 	public static void main(String[] args) {
-		
 		
 		ApplicationContext app =  new AnnotationConfigApplicationContext(BeanConfiguration.class);
 		
