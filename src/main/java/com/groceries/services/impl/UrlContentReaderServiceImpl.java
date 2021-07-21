@@ -1,6 +1,8 @@
+package com.groceries.services.impl;
+
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
-import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -8,41 +10,38 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.security.cert.X509Certificate;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import com.groceries.config.BeanConfiguration;
-import com.groceries.dto.Grocery;
-import com.groceries.services.GroceryService;
-import com.groceries.services.JsonObjectBuilder;
+import com.groceries.services.UrlContentReaderService;
 
-public class Application {
-	
-	public static final String DEFAULT_URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
-	
 
-	public static void main(String[] args) {
+
+@Service
+public class UrlContentReaderServiceImpl implements UrlContentReaderService {
 	
-		
-		ApplicationContext app =  new AnnotationConfigApplicationContext(BeanConfiguration.class);
-		
+	//Default url
+	@Value( "${url.groceries}" )
+	private String groceriesUrl;
+	
+	
+	public UrlContentReaderServiceImpl() {
 		initTrustConnections();
-		
-		GroceryService groceryService = (GroceryService)app.getBean("groceryService");
-		JsonObjectBuilder jsonService = (JsonObjectBuilder)app.getBean("jsonService");
-		try {
-			//Get groceries    
-			List<Grocery> groceries = groceryService.getAllGroceries(DEFAULT_URL);
-			//Parse groceries 
-			System.out.println("JSON is:\n" + jsonService.buildJsonObjectFromGroceryList(groceries));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 	
+	@Override
+	public Document getContentFromDefaultUrl() throws IOException {
+		return Jsoup.connect(groceriesUrl).get();
+	}
+
+	@Override
+	public Document getContentFromUrl(String url) throws IOException {
+		return Jsoup.connect(url).get();
+	}
 	
-	public static void initTrustConnections() {
+	private void initTrustConnections() {
 
 		System.setProperty("https.protocols", "TLSv1.2");
 
@@ -51,12 +50,13 @@ public class Application {
 			public java.security.cert.X509Certificate[] getAcceptedIssuers(){return null;}
 			public void checkClientTrusted(X509Certificate[] certs, String authType){}
 			public void checkServerTrusted(X509Certificate[] certs, String authType){}
+			
 			@Override
 			public void checkClientTrusted(
 					java.security.cert.X509Certificate[] arg0, String arg1)
 							throws CertificateException {
-
 			}
+			
 			@Override
 			public void checkServerTrusted(
 					java.security.cert.X509Certificate[] chain,
@@ -71,7 +71,10 @@ public class Application {
 			sc.init(null, trustAllCerts, new SecureRandom());
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
+
+
 
 }
